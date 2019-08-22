@@ -31,6 +31,7 @@ public class Duke {
                 listOfTasks[counter] = new task(userInputs);
                 counter ++;
                 stringSplitObject.setTotalTask(counter);
+                System.out.printf("added: %s\n",userInputs);
             }
         }
     }

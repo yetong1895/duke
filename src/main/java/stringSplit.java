@@ -29,7 +29,8 @@ public class stringSplit {
         return false;
     }
 
-    public int getTaskNum () { // get the
+    public int getTaskNum () { //return the task number to be mark as done
+
         return taskNum;
     }
 }
