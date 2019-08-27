@@ -23,9 +23,9 @@ public class stringSplit {
         breakString(command);
         if(split[0].equals("done") && isNumeric(split[1]) == true) { //check if the first string is "done" and the second string is a number.
                 convertToInt();
-                if(taskNum <= totalTask) {//check if the task number to be done is involve in the total number.
+ //               if(taskNum <= totalTask) {//check if the task number to be done is involve in the total number.
                     return true;
-                }
+ //               }
         }
         return false;
     }
