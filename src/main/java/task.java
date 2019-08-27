@@ -11,14 +11,14 @@ public class task {
 
     public void markAsDone() { //set the task as done
         isDone = true;
-        getStatusIcon();
+//        getStatusIcon();
     }
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void printTask() { //print out the status icon and the description
-        System.out.printf("[%s] %s\n",getStatusIcon(),description);
+    public String toString() { //print out the status icon and the description
+        return"["+ getStatusIcon()+"]"+" "+description;
     }
 }

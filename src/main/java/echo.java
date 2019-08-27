@@ -6,6 +6,7 @@ public class echo {
     public void repeatInput(String input) {
         System.out.printf("%s\n",input);
     }
+
     public void exitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
