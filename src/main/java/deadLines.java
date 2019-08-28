@@ -10,4 +10,9 @@ public class deadLines extends task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String saveFormat() {
+        return String.format("%s|%s|%s","D",super.saveFormat(),by);
+    }
 }

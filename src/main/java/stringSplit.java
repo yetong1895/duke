@@ -1,11 +1,6 @@
 public class stringSplit {
     private String split[] = new String[100];
     private int taskNum;
-    private int totalTask;
-
-    public void setTotalTask(int x) { //find the total number of task in the current list
-        totalTask = x;
-    }
 
     public void breakString(String command) { //split the string into individual words
         split = command.split(" ");
@@ -23,9 +18,7 @@ public class stringSplit {
         breakString(command);
         if(split[0].equals("done") && isNumeric(split[1]) == true) { //check if the first string is "done" and the second string is a number.
                 convertToInt();
- //               if(taskNum <= totalTask) {//check if the task number to be done is involve in the total number.
                     return true;
- //               }
         }
         return false;
     }
@@ -53,7 +46,24 @@ public class stringSplit {
 
 
     public int getTaskNum () { //return the task number to be mark as done
-
         return taskNum;
+    }
+    public void splitSaveData (String data) {
+        split = data.split("\\|");
+    }
+    public String saveData1 () {
+        return split[0];
+    }
+
+    public String saveData2() {
+        return split[1];
+    }
+
+    public String saveData3() {
+        return split[2];
+    }
+
+    public String saveData4() {
+        return split[3];
     }
 }

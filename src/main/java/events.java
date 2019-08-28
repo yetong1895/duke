@@ -9,4 +9,9 @@ public class events extends task{
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    @Override
+    public String saveFormat() {
+        return String.format("%s|%s|%s","E",super.saveFormat(),at);
+    }
 }
