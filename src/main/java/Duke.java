@@ -9,17 +9,19 @@ public class Duke {
         dukeException exception = new dukeException();
         Scanner inputs = new Scanner(System.in);
         saveWrite write = new saveWrite();
+        date dateObject = new date();
 
         int counter = 0;
         int taskNum,position,i;
         String first,second,third,forth,temp;
-
+        String userDate;
         //open save data
         saveRead read = new saveRead();
         read.openFile(); //open the save file
         read.readFile();//read the value of counter in the save file
         temp = read.getData();
-        counter = Integer.valueOf(temp);
+        if(temp.length() != 0)
+            counter = Integer.valueOf(temp);
 
         for(i = 1;i <= counter;i ++) {
             read.readFile();
@@ -36,12 +38,18 @@ public class Duke {
             } else if(first.equals("E")) { //if it is event task
                 forth = checker.saveData4();
                 listOfTasks[i] = new events(third,forth);
+
+                dateObject.setCounter(counter);
+                dateObject.dateConvert(forth);
                 if(second.equals("1"))
                     listOfTasks[i].markAsDone();
 
             } else if(first.equals("D")) { //if it is deadline task
                 forth = checker.saveData4();
                 listOfTasks[i] = new deadLines(third,forth);
+
+                dateObject.setCounter(counter);
+                dateObject.dateConvert(forth);
                 if(second.equals("1"))
                     listOfTasks[i].markAsDone();
             }
@@ -90,27 +98,50 @@ public class Duke {
             } else if(checker.checkEvent(userInputs) == true) {//check if the user command is a valid 'event' command
                 counter++;
                 position = userInputs.indexOf("/"); //find the position of the separator '/'
+
+                userDate = userInputs.substring(position + 4);
                 if(position == -1 || userInputs.length() <= position + 4) {
                     exception.StringIndexOutOfBoundsException(listOfTasks,userInputs,counter,"event");//call exception for invalid inputs
                     counter--;
                 } else {//valid inputs
-                    listOfTasks[counter] = new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4));
-                    System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
+                    dateObject.setCounter(counter);
+                    dateObject.dateConvert(userDate);
+
+                    if(dateObject.getCheckDate() == true) {//check if the date input is valid
+                        listOfTasks[counter] = new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4));
+                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
+                    } else {
+                        counter--;
+                    }
                 }
             } else if(checker.checkDeadline(userInputs) == true) {//check if the user command is a valid 'deadline' command
                 counter++;
                 position = userInputs.indexOf("/"); //find the position of the separator '/'
+                userDate = userInputs.substring(position + 4);
+
                 if(position == -1 || userInputs.length() <= position + 4) {
                     exception.StringIndexOutOfBoundsException(listOfTasks,userInputs,counter,"deadline");//call exception for invalid inputs
                     counter--;
                 } else {
-                    listOfTasks[counter] = new deadLines(userInputs.substring(9, position - 1), userInputs.substring(position + 4));
-                    System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
+                    dateObject.setCounter(counter);
+                    dateObject.dateConvert(userDate);
+                    if(dateObject.getCheckDate() == true) {//check if the date input is valid
+                        listOfTasks[counter] = new deadLines(userInputs.substring(9, position - 1), userInputs.substring(position + 4));
+                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
+                    } else {
+                        counter--;
+                    }
                 }
             } else {//all other invalid inputs
                 System.out.println("Sorry, the input is invalid");
             }
+
+            dateObject.setCounter(counter);
         }
+        //convert the date and time
+//        date dateObject = new date();
+//        dateObject.dateConvert();
+
         //save
         write.openFile();
         String numOfTasks = Integer.toString(counter);
