@@ -79,7 +79,7 @@ public class Duke {
                     exception.NullPointerException(listOfTasks, taskNum, counter); //handle exception; I.E user enter an invalid task number
                 } else {
                     if(listOfTasks[taskNum].checkDone() == true) {//check if the task is already done
-                        System.out.println("This task is already maked  as done.");
+                        System.out.println("This task is already marked  as done.");
                     } else {
                         listOfTasks[taskNum].markAsDone(); //mark the task as done
                         System.out.println("Nice! I've marked this task as done:");//print the task after marking as done
@@ -99,11 +99,11 @@ public class Duke {
                 counter++;
                 position = userInputs.indexOf("/"); //find the position of the separator '/'
 
-                userDate = userInputs.substring(position + 4);
                 if(position == -1 || userInputs.length() <= position + 4) {
                     exception.StringIndexOutOfBoundsException(listOfTasks,userInputs,counter,"event");//call exception for invalid inputs
                     counter--;
                 } else {//valid inputs
+                    userDate = userInputs.substring(position + 4);
                     dateObject.setCounter(counter);
                     dateObject.dateConvert(userDate);
 
@@ -117,12 +117,12 @@ public class Duke {
             } else if(checker.checkDeadline(userInputs) == true) {//check if the user command is a valid 'deadline' command
                 counter++;
                 position = userInputs.indexOf("/"); //find the position of the separator '/'
-                userDate = userInputs.substring(position + 4);
 
                 if(position == -1 || userInputs.length() <= position + 4) {
                     exception.StringIndexOutOfBoundsException(listOfTasks,userInputs,counter,"deadline");//call exception for invalid inputs
                     counter--;
                 } else {
+                    userDate = userInputs.substring(position + 4);
                     dateObject.setCounter(counter);
                     dateObject.dateConvert(userDate);
                     if(dateObject.getCheckDate() == true) {//check if the date input is valid

@@ -2,7 +2,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 public class date {
-    String[] listOfDate = new String[100];
+    String[] listOfDate = new String[100]; //store the list of dates
     Date dueDate = new Date();
     private int counter = 1;
     private boolean checkDate = false;
@@ -29,8 +29,8 @@ public class date {
         } catch(ParseException e) {//if user input a invalid time format
             checkDate = false;
             System.out.println("Invalid date and time format. Please enter your date and time in the following format :\n" +
-                    "dd/mm/yyyy hh mm  i.e. 05.12.2019 12 30 OR\n" +
-                    "dd/mm/yyyy hh mm-hh mm  i.e. 05.12.2019 12 30-14 30\n");
+                    "dd.mm.yyyy hh mm  i.e. 05.12.2019 12 30  OR\n" +
+                    "dd.mm.yyyy hh mm-hh mm  i.e. 05.12.2019 12 30-14 30\n");
         }
     }
 
