@@ -54,8 +54,6 @@ public class Duke {
                     exception.StringIndexOutOfBoundsException(listOfTasks,userInputs,counter,"event");//call exception for invalid inputs
                     counter--;
                 } else {//valid inputs
-                    System.out.println(position);
-                    System.out.println(userInputs.length());
                     listOfTasks[counter] = new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4));
                     checker.setTotalTask(counter); //error checking
                     System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
