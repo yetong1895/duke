@@ -17,8 +17,17 @@ public class stringSplit {
     public boolean checkDone(String command) { //check if there is a "done" command
         breakString(command);
         if(split[0].equals("done") && isNumeric(split[1]) == true) { //check if the first string is "done" and the second string is a number.
-                convertToInt();
-                    return true;
+            convertToInt();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkDelete(String command) {
+        breakString(command);
+        if(split[0].equals("delete") && isNumeric(split[1]) == true) {
+            convertToInt();
+            return true;
         }
         return false;
     }

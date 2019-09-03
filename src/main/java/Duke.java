@@ -82,6 +82,17 @@ public class Duke {
 //                        System.out.println(listOfTasks[i].toString());
                     }
                 }
+            } else if(checker.checkDelete(userInputs) == true) {
+                taskNum = checker.getTaskNum();
+                if (taskNum > counter) {
+                    exception.IndexOutOfBoundsException(listOfTasks, taskNum, counter);
+                } else {
+                    counter --;
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(listOfTasks.get(taskNum).toString());
+                    System.out.printf("Now you have %d tasks in the list.\n", counter);
+                    listOfTasks.remove(taskNum);
+                }
             } else if(checker.checkDone(userInputs) == true) { //check if the user command is a valid 'done' command
                 taskNum = checker.getTaskNum();   //get the task number of the command to be done
                 if(taskNum > counter) {
