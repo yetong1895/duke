@@ -23,7 +23,7 @@ public class Duke {
         listOfTasks.add(new task("Dummy input to consume index 0"));
         if(temp != null) {
             if (temp.length() != 0) {
-                counter = Integer.valueOf(temp);
+                counter = Integer.parseInt(temp);
             }
         }
         for(i = 1;i <= counter;i ++) {
