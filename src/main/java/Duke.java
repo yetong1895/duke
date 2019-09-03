@@ -5,24 +5,27 @@ public class Duke {
     public static void main(String[] args) {
         echo echoObject = new echo();
         stringSplit checker = new stringSplit();
-        task[] listOfTasks = new task[100];
+        ArrayList<task> listOfTasks = new ArrayList<task>();
         dukeException exception = new dukeException();
         Scanner inputs = new Scanner(System.in);
         saveWrite write = new saveWrite();
         date dateObject = new date();
+        saveRead read = new saveRead();
 
         int counter = 0;
         int taskNum,position,i;
         String first,second,third,forth,temp;
         String userDate;
         //open save data
-        saveRead read = new saveRead();
         read.openFile(); //open the save file
         read.readFile();//read the value of counter in the save file
         temp = read.getData();
-        if(temp.length() != 0)
-            counter = Integer.valueOf(temp);
-
+        listOfTasks.add(new task("Dummy input to consume index 0"));
+        if(temp != null) {
+            if (temp.length() != 0) {
+                counter = Integer.valueOf(temp);
+            }
+        }
         for(i = 1;i <= counter;i ++) {
             read.readFile();
             temp = read.getData();
@@ -31,27 +34,32 @@ public class Duke {
             second = checker.saveData2(); //second part; I.E done or not done
             third = checker.saveData3(); //third part; I.E description
             if(first.equals("T")) { //if it is todo task
-                listOfTasks[i] = new todos(third);
+//                listOfTasks[i] = new todos(third);
+                listOfTasks.add(new todos(third));
                 if(second.equals("1"))
-                    listOfTasks[i].markAsDone();
+                    listOfTasks.get(i).markAsDone();
+//                    listOfTasks[i].markAsDone();
 
             } else if(first.equals("E")) { //if it is event task
                 forth = checker.saveData4();
-                listOfTasks[i] = new events(third,forth);
+                listOfTasks.add(new events(third,forth));
+//                listOfTasks[i] = new events(third,forth);
 
                 dateObject.setCounter(counter);
                 dateObject.dateConvert(forth);
                 if(second.equals("1"))
-                    listOfTasks[i].markAsDone();
-
+                    listOfTasks.get(i).markAsDone();
+//                    listOfTasks[i].markAsDone();
+//
             } else if(first.equals("D")) { //if it is deadline task
                 forth = checker.saveData4();
-                listOfTasks[i] = new deadLines(third,forth);
-
+//                listOfTasks[i] = new deadLines(third,forth);
+                listOfTasks.add(new deadLines(third,forth));
                 dateObject.setCounter(counter);
                 dateObject.dateConvert(forth);
                 if(second.equals("1"))
-                    listOfTasks[i].markAsDone();
+//                    listOfTasks[i].markAsDone();
+                     listOfTasks.get(i).markAsDone();
             }
         }
         read.closeFile(); // close the file
@@ -70,20 +78,21 @@ public class Duke {
                 } else {
                     for (i = 1; i <= counter; i += 1) {
                         System.out.printf("%d.", i);
-                        System.out.println(listOfTasks[i].toString());
+                        System.out.println(listOfTasks.get(i).toString());
+//                        System.out.println(listOfTasks[i].toString());
                     }
                 }
             } else if(checker.checkDone(userInputs) == true) { //check if the user command is a valid 'done' command
                 taskNum = checker.getTaskNum();   //get the task number of the command to be done
                 if(taskNum > counter) {
-                    exception.NullPointerException(listOfTasks, taskNum, counter); //handle exception; I.E user enter an invalid task number
+                    exception.IndexOutOfBoundsException(listOfTasks, taskNum, counter); //handle exception; I.E user enter an invalid task number
                 } else {
-                    if(listOfTasks[taskNum].checkDone() == true) {//check if the task is already done
+                    if(listOfTasks.get(taskNum).checkDone() == true) {//check if the task is already done
                         System.out.println("This task is already marked  as done.");
                     } else {
-                        listOfTasks[taskNum].markAsDone(); //mark the task as done
+                        listOfTasks.get(taskNum).markAsDone(); //mark the task as done
                         System.out.println("Nice! I've marked this task as done:");//print the task after marking as done
-                        System.out.println(listOfTasks[taskNum].toString());
+                        System.out.println(listOfTasks.get(taskNum).toString());
                     }
                 }
             }else if(checker.checkTodo(userInputs) == true) { //check if the user command is a valid 'todo' command
@@ -92,8 +101,9 @@ public class Duke {
                     exception.StringIndexOutOfBoundsException(listOfTasks,userInputs,counter,"todo");
                     counter --;
                 } else {
-                    listOfTasks[counter] = new todos(userInputs.substring(5));
-                    System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
+//                    listOfTasks[counter] = new todos(userInputs.substring(5));
+                    listOfTasks.add(new todos(userInputs.substring(5)));
+                    System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks.get(counter).toString(), counter);
                 }
             } else if(checker.checkEvent(userInputs) == true) {//check if the user command is a valid 'event' command
                 counter++;
@@ -108,8 +118,9 @@ public class Duke {
                     dateObject.dateConvert(userDate);
 
                     if(dateObject.getCheckDate() == true) {//check if the date input is valid
-                        listOfTasks[counter] = new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4));
-                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
+//                        listOfTasks[counter] = new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4));
+                        listOfTasks.add(new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4)));
+                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks.get(counter).toString(), counter);
                     } else {
                         counter--;
                     }
@@ -126,8 +137,9 @@ public class Duke {
                     dateObject.setCounter(counter);
                     dateObject.dateConvert(userDate);
                     if(dateObject.getCheckDate() == true) {//check if the date input is valid
-                        listOfTasks[counter] = new deadLines(userInputs.substring(9, position - 1), userInputs.substring(position + 4));
-                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks[counter].toString(), counter);
+//                        listOfTasks[counter] = new deadLines(userInputs.substring(9, position - 1), userInputs.substring(position + 4));
+                        listOfTasks.add(new deadLines(userInputs.substring(9, position - 1), userInputs.substring(position + 4)));
+                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks.get(counter).toString(), counter);
                     } else {
                         counter--;
                     }
@@ -147,7 +159,7 @@ public class Duke {
         String numOfTasks = Integer.toString(counter);
         write.addRecords(numOfTasks); //first save the value of counter into the save.txt file
         for(i = 1;i <= counter; i++) {//loop through the array of objects and save the information into save.txt file
-            temp = listOfTasks[i].saveFormat();
+            temp = listOfTasks.get(i).saveFormat();
             write.addRecords(temp);
         }
         write.closeFile();//close the file

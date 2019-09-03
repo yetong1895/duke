@@ -1,9 +1,13 @@
 public class events extends task{
     protected String at;
+    private int rank;
     public events(String description,String at) {
         super(description);
         this.at = at;
     }
+//    public void setRank(int rank) {
+//        this.rank = rank;
+//    }
 
     @Override
     public String toString() {

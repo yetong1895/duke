@@ -1,12 +1,14 @@
+import java.util.ArrayList;
+
 public class dukeException {
-    task[] listOfTask = new task[100];
+    ArrayList<task> listOfTasks = new ArrayList<task>();
     String temp;
 
-    public void NullPointerException(task[] listOfTask, int a, int counter) {
-        this.listOfTask = listOfTask;
+    public void IndexOutOfBoundsException(ArrayList<task> listOfTasks, int a, int counter) {
+        this.listOfTasks = listOfTasks;
         try {
-            listOfTask[a].markAsDone();
-        } catch (NullPointerException e) {
+            listOfTasks.get(a).markAsDone();
+        } catch (IndexOutOfBoundsException e) {
             if (counter == 0) {
                 System.out.printf("Sorry, there is not task in the list.\n");
             } else if (counter == 1) {
@@ -18,13 +20,13 @@ public class dukeException {
 
     }
 
-    public void StringIndexOutOfBoundsException(task[] listOfTask, String inputs, int a, String taskType) {
-        this.listOfTask = listOfTask;
+    public void StringIndexOutOfBoundsException(ArrayList<task> listOfTasks, String inputs, int a, String taskType) {
+        this.listOfTasks = listOfTasks;
         if (inputs.length() == 5 && taskType.equals("todo")) { //hand the exception from 'todo'
             System.out.println("Sorry, the description of a todo cannot be empty.");
         } else if(inputs.length() != 5 && taskType.equals("todo")){
             try {
-                listOfTask[a] = new todos(inputs.substring(5));
+                listOfTasks.add(new todos(inputs.substring(5)));
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Sorry, the description of a todo cannot be empty.");
             }
@@ -33,7 +35,7 @@ public class dukeException {
         int position = inputs.indexOf("/"); //find the position of the separator '/'
         if(taskType.equals("event")) {
             try {
-                listOfTask[a] = new events(inputs.substring(6, position - 1), inputs.substring(position + 4));
+                listOfTasks.add(new events(inputs.substring(6, position - 1), inputs.substring(position + 4)));
             } catch (StringIndexOutOfBoundsException e) {
                 if (inputs.length() <= 7) {
                     System.out.println("Sorry, the description of an event cannot be empty.");
@@ -43,7 +45,7 @@ public class dukeException {
             }
         } else if(taskType.equals("deadline")) {
             try {
-                listOfTask[a] = new deadLines(inputs.substring(9, position - 1), inputs.substring(position + 4));
+                listOfTasks.add(new deadLines(inputs.substring(9, position - 1), inputs.substring(position + 4)));
             } catch (StringIndexOutOfBoundsException e) {
                 if (inputs.length() <= 9) {
                     System.out.println("Sorry, the description of an event cannot be empty.");
