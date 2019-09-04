@@ -25,7 +25,7 @@ fi
 java -jar ./build/libs/duke-0.1.3.jar < ./text-ui-test/input.txt > ./text-ui-test/ACTUAL.TXT
 
 # compare the output to the expected output
-diff ./text-ui-test/input.txt ./text-ui-test/ACTUAL.TXT
+diff ./text-ui-test/ACTUAL.TXT ./text-ui-test/EXPECTED.txt
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"

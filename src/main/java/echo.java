@@ -8,6 +8,6 @@ public class echo {
     }
 
     public void exitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.print("Bye. Hope to see you again soon!");
     }
 }

@@ -17,7 +17,7 @@ public class saveRead {
         try {
             datas = read.nextLine();
         } catch (NoSuchElementException e) {
-            System.out.println("You have no task in your list.Try to add some new tasks with todo/event/deadline keywords.");
+//            System.out.println("You have no task in your list.Try to add some new tasks with todo/event/deadline keywords.");
         }
     }
 

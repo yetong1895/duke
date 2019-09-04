@@ -1,1 +1,7 @@
+todo return book
+deadline return book /by 12.12.2019 23 59
+event concert /on 20.12.2020 18 00-22 00
+todo
+list
+done 3
 bye
