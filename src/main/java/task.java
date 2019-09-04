@@ -11,6 +11,10 @@ public class task {
         isDoneInt = 0;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void markAsDone() { //set the task as done
         isDone = true;
         isDoneInt = 1;

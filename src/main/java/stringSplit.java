@@ -53,6 +53,13 @@ public class stringSplit {
         return false;
     }
 
+    public boolean checkFind(String  command) {
+        if(split[0].equals("find")) {
+            return true;
+        }
+        return false;
+    }
+
 
     public int getTaskNum () { //return the task number to be mark as done
         return taskNum;

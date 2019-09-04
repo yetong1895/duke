@@ -17,52 +17,46 @@ public class Duke {
         String first,second,third,forth,temp;
         String userDate;
         //open save data
-//        read.openFile(); //open the save file
-//        read.readFile();//read the value of counter in the save file
-//        temp = read.getData();
+        read.openFile(); //open the save file
+        read.readFile();//read the value of counter in the save file
+        temp = read.getData();
         listOfTasks.add(new task("Dummy input to consume index 0"));
-//        if(temp != null) {
-//            if (temp.length() != 0) {
-//                counter = Integer.parseInt(temp);
-//            }
-//        }
-//        for(i = 1;i <= counter;i ++) {
-//            read.readFile();
-//            temp = read.getData();
-//            checker.splitSaveData(temp); //split the string temp
-//            first = checker.saveData1(); //first part; I.E. the task type
-//            second = checker.saveData2(); //second part; I.E done or not done
-//            third = checker.saveData3(); //third part; I.E description
-//            if(first.equals("T")) { //if it is todo task
-////                listOfTasks[i] = new todos(third);
-//                listOfTasks.add(new todos(third));
-//                if(second.equals("1"))
-//                    listOfTasks.get(i).markAsDone();
-////                    listOfTasks[i].markAsDone();
+        if(temp != null) {
+            if (temp.length() != 0) {
+                counter = Integer.parseInt(temp);
+            }
+        }
+        for(i = 1;i <= counter;i ++) {
+            read.readFile();
+            temp = read.getData();
+            checker.splitSaveData(temp); //split the string temp
+            first = checker.saveData1(); //first part; I.E. the task type
+            second = checker.saveData2(); //second part; I.E done or not done
+            third = checker.saveData3(); //third part; I.E description
+            if(first.equals("T")) { //if it is todo task
+                listOfTasks.add(new todos(third));
+                if(second.equals("1"))
+                    listOfTasks.get(i).markAsDone();
+
+            } else if(first.equals("E")) { //if it is event task
+                forth = checker.saveData4();
+                listOfTasks.add(new events(third,forth));
+
+                dateObject.setCounter(counter);
+                dateObject.dateConvert(forth);
+                if(second.equals("1"))
+                    listOfTasks.get(i).markAsDone();
 //
-//            } else if(first.equals("E")) { //if it is event task
-//                forth = checker.saveData4();
-//                listOfTasks.add(new events(third,forth));
-////                listOfTasks[i] = new events(third,forth);
-//
-//                dateObject.setCounter(counter);
-//                dateObject.dateConvert(forth);
-//                if(second.equals("1"))
-//                    listOfTasks.get(i).markAsDone();
-////                    listOfTasks[i].markAsDone();
-////
-//            } else if(first.equals("D")) { //if it is deadline task
-//                forth = checker.saveData4();
-////                listOfTasks[i] = new deadLines(third,forth);
-//                listOfTasks.add(new deadLines(third,forth));
-//                dateObject.setCounter(counter);
-//                dateObject.dateConvert(forth);
-//                if(second.equals("1"))
-////                    listOfTasks[i].markAsDone();
-//                     listOfTasks.get(i).markAsDone();
-//            }
-//        }
-//        read.closeFile(); // close the file
+            } else if(first.equals("D")) { //if it is deadline task
+                forth = checker.saveData4();
+                listOfTasks.add(new deadLines(third,forth));
+                dateObject.setCounter(counter);
+                dateObject.dateConvert(forth);
+                if(second.equals("1"))
+                     listOfTasks.get(i).markAsDone();
+            }
+        }
+        read.closeFile(); // close the file
 
         //interface start here
         while(true) {
@@ -79,10 +73,9 @@ public class Duke {
                     for (i = 1; i <= counter; i += 1) {
                         System.out.printf("%d.", i);
                         System.out.println(listOfTasks.get(i).toString());
-//                        System.out.println(listOfTasks[i].toString());
                     }
                 }
-            } else if(checker.checkDelete(userInputs) == true) {
+            } else if(checker.checkDelete(userInputs) == true) {//check if the user command is a valid 'delete' command
                 taskNum = checker.getTaskNum();
                 if (taskNum > counter) {
                     exception.IndexOutOfBoundsException(listOfTasks, taskNum, counter);
@@ -95,10 +88,10 @@ public class Duke {
                 }
             } else if(checker.checkDone(userInputs) == true) { //check if the user command is a valid 'done' command
                 taskNum = checker.getTaskNum();   //get the task number of the command to be done
-                if(taskNum > counter) {
+                if (taskNum > counter) {
                     exception.IndexOutOfBoundsException(listOfTasks, taskNum, counter); //handle exception; I.E user enter an invalid task number
                 } else {
-                    if(listOfTasks.get(taskNum).checkDone() == true) {//check if the task is already done
+                    if (listOfTasks.get(taskNum).checkDone() == true) {//check if the task is already done
                         System.out.println("This task is already marked as done.");
                     } else {
                         listOfTasks.get(taskNum).markAsDone(); //mark the task as done
@@ -106,15 +99,21 @@ public class Duke {
                         System.out.println(listOfTasks.get(taskNum).toString());
                     }
                 }
+            } else if(checker.checkFind(userInputs) == true) { //check if it is a valid 'find' command
+                System.out.println("Here are the matching tasks in your list:");
+                for(i = 1;i <= counter;i++) {
+                    if(listOfTasks.get(i).getDescription().contains(userInputs.substring(5))) { //find the keyword
+                        System.out.println(listOfTasks.get(i).toString());
+                    }
+                }
+
             }else if(checker.checkTodo(userInputs) == true) { //check if the user command is a valid 'todo' command
                 counter++;
                 if(userInputs.length() < 6) { //handle exception; I.E. user have not enter the description of the task
                     exception.StringIndexOutOfBoundsException(listOfTasks,userInputs,counter,"todo");
                     counter --;
                 } else {
-//                    listOfTasks[counter] = new todos(userInputs.substring(5));
                     listOfTasks.add(new todos(userInputs.substring(5)));
-//                    System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks.get(counter).toString(), counter);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + listOfTasks.get(counter).toString());
                     System.out.println("Now you have " + counter + " tasks in the list.");
@@ -132,7 +131,6 @@ public class Duke {
                     dateObject.dateConvert(userDate);
 
                     if(dateObject.getCheckDate() == true) {//check if the date input is valid
-//                        listOfTasks[counter] = new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4));
                         listOfTasks.add(new events(userInputs.substring(6, position - 1), userInputs.substring(position + 4)));
 //                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks.get(counter).toString(), counter);
                         System.out.println("Got it. I've added this task:");
@@ -154,7 +152,6 @@ public class Duke {
                     dateObject.setCounter(counter);
                     dateObject.dateConvert(userDate);
                     if(dateObject.getCheckDate() == true) {//check if the date input is valid
-//                        listOfTasks[counter] = new deadLines(userInputs.substring(9, position - 1), userInputs.substring(position + 4));
                         listOfTasks.add(new deadLines(userInputs.substring(9, position - 1), userInputs.substring(position + 4)));
 //                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", listOfTasks.get(counter).toString(), counter);
                         System.out.println("Got it. I've added this task:");
@@ -170,18 +167,15 @@ public class Duke {
 
             dateObject.setCounter(counter);
         }
-        //convert the date and time
-//        date dateObject = new date();
-//        dateObject.dateConvert();
 
         //save
-//        write.openFile();
-//        String numOfTasks = Integer.toString(counter);
-//        write.addRecords(numOfTasks); //first save the value of counter into the save.txt file
-//        for(i = 1;i <= counter; i++) {//loop through the array of objects and save the information into save.txt file
-//            temp = listOfTasks.get(i).saveFormat();
-//            write.addRecords(temp);
-//        }
-//        write.closeFile();//close the file
+        write.openFile();
+        String numOfTasks = Integer.toString(counter);
+        write.addRecords(numOfTasks); //first save the value of counter into the save.txt file
+        for(i = 1;i <= counter; i++) {//loop through the array of objects and save the information into save.txt file
+            temp = listOfTasks.get(i).saveFormat();
+            write.addRecords(temp);
+        }
+        write.closeFile();//close the file
     }
 }
