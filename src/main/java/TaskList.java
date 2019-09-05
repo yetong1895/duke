@@ -22,7 +22,13 @@ public class TaskList {
     public void setListOfTasks(ArrayList<task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
+    public int getCounter() {
+        return counter;
+    }
 
+    public ArrayList<task> getListOfTasks() {
+        return listOfTasks;
+    }
 
     public void startTask() {
         while (true) {

@@ -2,35 +2,38 @@ import jdk.jfr.Event;
 import java.io.File;
 import java.util.*;
 public class Duke {
-    public static void main(String[] args) {
-        ArrayList<task> listOfTasks = new ArrayList<task>();
+    private storage storageObject;
+    private ArrayList<task> listOfTasts;
+    private TaskList TaskList;
+    private int counter = 0;
 
-        //****************************************//storage
-        storage storageObject = new storage();
-        //****************************************//
-
-        int counter = 0;
-        int taskNum,position,i;
-        String userDate;
-
-        //*****************************storage
+    public Duke() {
+        storageObject = new storage();
+        listOfTasts = new ArrayList<task>();
         storageObject.load();
-        listOfTasks = storageObject.getListOfTasks();
+        listOfTasts = storageObject.getListOfTasks();
         counter = storageObject.getCounter();
-        //*****************************
+    }
 
-        //*****************************TaskList
-        TaskList TaskList = new TaskList();
-        TaskList.setListOfTasks(listOfTasks);
+    public void run() {
+        TaskList = new TaskList();
+        TaskList.setListOfTasks(listOfTasts);
         TaskList.setCounter(counter);
         TaskList.startTask();
-        //*****************************
+        counter = TaskList.getCounter();
+        listOfTasts = TaskList.getListOfTasks();
+    }
 
-        //save
-        //***************************************storage
-        storageObject.setListOfTasks(listOfTasks);
+    public void close() {
+        storageObject.setListOfTasks(listOfTasts);
         storageObject.setCounter(counter);
         storageObject.save();
-        //***************************************
+    }
+
+    public static void main(String[] args) {
+        Duke Duke = new Duke();
+        Duke.run();
+        Duke.close();
+
     }
 }

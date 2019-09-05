@@ -1,5 +1,0 @@
-4
-T|0|event
-T|0|event
-D|0|wawawa|12.12.2019 12 30
-T|0|new event
