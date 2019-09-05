@@ -24,6 +24,9 @@ fi
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -jar ./build/libs/duke-0.1.3.jar < ./text-ui-test/input.txt > ./text-ui-test/ACTUAL.TXT
 
+#remove the saves content from test cases
+>saves.txt
+
 # compare the output to the expected output
 diff ./text-ui-test/ACTUAL.TXT ./text-ui-test/EXPECTED.txt
 if [ $? -eq 0 ]
