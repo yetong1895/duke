@@ -30,13 +30,13 @@ public class Ui{
         System.out.printf("Now you have %d tasks in the list.\n", counter);
     }
 
-    public void checkDoneMessage(boolean done,int taskNum,ArrayList<task> listOfTasks) {
-        if(done == true) {
+    public void MarkAsDoneMessage(int taskNum,ArrayList<task> listOfTasks) {
+        System.out.println("Nice! I've marked this task as done:");//print the task after marking as done
+        System.out.println(listOfTasks.get(taskNum).toString());
+    }
+
+    public void checkDoneMessage() {
             System.out.println("This task is already marked as done.");
-        } else {
-            System.out.println("Nice! I've marked this task as done:");//print the task after marking as done
-            System.out.println(listOfTasks.get(taskNum).toString());
-        }
     }
 
     public void checkFindMessage(int counter,String userInputs, ArrayList<task> listOfTasks) {

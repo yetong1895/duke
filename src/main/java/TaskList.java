@@ -59,10 +59,10 @@ public class TaskList {
                     exception.IndexOutOfBoundsException(listOfTasks, taskNum, counter); //handle exception; I.E user enter an invalid task number
                 } else {
                     if (listOfTasks.get(taskNum).checkDone() == true) {//check if the task is already done
-                        UiObject.checkDoneMessage(listOfTasks.get(taskNum).checkDone(),taskNum,listOfTasks);
+                        UiObject.checkDoneMessage();
                     } else {
                         listOfTasks.get(taskNum).markAsDone(); //mark the task as done
-                        UiObject.checkDoneMessage(listOfTasks.get(taskNum).checkDone(),taskNum,listOfTasks);
+                        UiObject.MarkAsDoneMessage(taskNum,listOfTasks);
                     }
                 }
             } else if (checker.checkFind(userInputs) == true) { //check if it is a valid 'find' command
