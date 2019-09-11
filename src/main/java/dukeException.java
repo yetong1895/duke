@@ -4,6 +4,12 @@ public class dukeException {
     ArrayList<task> listOfTasks = new ArrayList<task>();
     String temp;
 
+    /**
+     * This method will check for IndexOutOfBoundsException
+     * @param listOfTasks the list of tasks that the user have input
+     * @param a that task number that the method is dealing with
+     * @param counter the number of tasks that is in the task list.
+     */
     public void IndexOutOfBoundsException(ArrayList<task> listOfTasks, int a, int counter) {
         this.listOfTasks = listOfTasks;
         try {
@@ -20,6 +26,13 @@ public class dukeException {
 
     }
 
+    /**
+     * This method will check for StringIndexOutOfBoundsException
+     * @param listOfTasks the list of tasks that the user have input
+     * @param inputs the current user input that needed to be checked.
+     * @param a the task number that the method is currently dealing with
+     * @param taskType what type of the task that the user input;todo, event or deadline;
+     */
     public void StringIndexOutOfBoundsException(ArrayList<task> listOfTasks, String inputs, int a, String taskType) {
         this.listOfTasks = listOfTasks;
         if (inputs.length() == 5 && taskType.equals("todo")) { //hand the exception from 'todo'
