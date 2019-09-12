@@ -8,10 +8,18 @@ public class date {
     private boolean checkDate = false;
     private int position;
 
+    /**
+     * Take in a counter and set the counter in this class as that counter.
+     * @param counter
+     */
     public void setCounter(int counter) {
         this.counter = counter;
     }
 
+    /**
+     * Take in the user input date and convert it to a system recognisable date
+     * @param inputDate
+     */
     public void dateConvert(String inputDate) {
         listOfDate[counter] = inputDate;
         position = inputDate.indexOf("-");
@@ -34,7 +42,10 @@ public class date {
         }
     }
 
-    //check if the input date is a valid input date
+    /**
+     * check if the input date is a valid input date
+     * @return checkDate the checker to see if the user input is a valid date.
+     */
     public boolean getCheckDate () {
         return checkDate;
     }

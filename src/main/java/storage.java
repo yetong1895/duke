@@ -11,10 +11,18 @@ public class storage {
     private int taskNum,position,i;
     private String first,second,third,forth,temp;
 
+    /**
+     * This method will set the listOfTasks in this class
+     * @param listOfTasks the list of class to be set in this class
+     */
     public void setListOfTasks(ArrayList<task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
 
+    /**
+     * This method will return the listOfTask
+     * @return
+     */
     public ArrayList<task> getListOfTasks() {
         return listOfTasks;
     }

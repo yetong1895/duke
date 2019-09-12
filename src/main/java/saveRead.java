@@ -4,6 +4,10 @@ import java.util.*;
 public class saveRead {
     private Scanner read;
     private String datas;
+
+    /**
+     * This method will read the saves.txt file that stored the save data
+     */
     public void openFile() {
         try{
             read = new Scanner(new File("saves.txt"));
@@ -12,7 +16,9 @@ public class saveRead {
         }
     }
 
-    //read the next line of data
+    /**
+     * This method will read the next line of the save data
+     */
     public void readFile() {
         try {
             datas = read.nextLine();
@@ -21,12 +27,17 @@ public class saveRead {
         }
     }
 
-    //return the data value
+    /**
+     * This method will return the data value
+     * @return datas the data value
+     */
     public String getData() {
         return datas;
     }
 
-    //close the file
+    /**
+     * This method will close the scanner read.
+     */
     public void closeFile() {
         read.close();
     }
