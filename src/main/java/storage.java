@@ -21,20 +21,32 @@ public class storage {
 
     /**
      * This method will return the listOfTask
-     * @return
+     * @return listOfTasks the list of task to be return.
      */
     public ArrayList<task> getListOfTasks() {
         return listOfTasks;
     }
 
+    /**
+     * This method set the counter in this class to the counter that is passed in.
+     * @param counter
+     */
     public void setCounter(int counter) {
         this.counter = counter;
     }
 
+    /**
+     * This method return the counter in this class.
+     * @return counter the counter to be returned
+     */
     public int getCounter() {
         return counter;
     }
 
+    /**
+     * This method will open the save file and read the data from the save file,the data will then be convert to display format
+     * and stored into the ArrayList of object.
+     */
     public void load() {
         //open save data
         read.openFile(); //open the save file
@@ -80,6 +92,9 @@ public class storage {
 
     }
 
+    /**
+     * This method will convert the contents in the listOfTasks into the save format and save into the save file
+     */
     public void save() {
         write.openFile();
         String numOfTasks = Integer.toString(counter);

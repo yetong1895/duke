@@ -9,6 +9,7 @@ public class dukeException {
      * @param listOfTasks the list of tasks that the user have input
      * @param a that task number that the method is dealing with
      * @param counter the number of tasks that is in the task list.
+     * @throws IndexOutOfBoundsException the exception when user try to access a task number that is more than the total number of tasks in the list.
      */
     public void IndexOutOfBoundsException(ArrayList<task> listOfTasks, int a, int counter) {
         this.listOfTasks = listOfTasks;
@@ -32,6 +33,7 @@ public class dukeException {
      * @param inputs the current user input that needed to be checked.
      * @param a the task number that the method is currently dealing with
      * @param taskType what type of the task that the user input;todo, event or deadline;
+     * @throws StringIndexOutOfBoundsException the exception when user did not key in the valid information or date
      */
     public void StringIndexOutOfBoundsException(ArrayList<task> listOfTasks, String inputs, int a, String taskType) {
         this.listOfTasks = listOfTasks;

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskList {
+public class    TaskList {
     Ui UiObject = new Ui();
     Parser checker = new Parser();
     ArrayList<task> listOfTasks = new ArrayList<task>();
@@ -16,20 +16,43 @@ public class TaskList {
     private int position;
     private String userDate;
 
+    /**
+     * This method will set the counter in this class equals to the counter that passed in.
+     * @param counter the counter to be set in this method
+     */
     public void setCounter(int counter) {
         this.counter = counter;
     }
+
+    /**
+     * This method will set the listOfTasks in this class equals to the listOfTask equals to the listOfTasks that passed in.
+     * @param listOfTasks the array list to be passed in.
+     */
     public void setListOfTasks(ArrayList<task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
+
+    /**
+     * This method return the counter
+     * @return counter the number of task.
+     */
     public int getCounter() {
         return counter;
     }
 
+    /**
+     * This method return the array list listOfTasks;
+     * @return listOfTasks the list of task in this class
+     */
     public ArrayList<task> getListOfTasks() {
         return listOfTasks;
     }
 
+    /**
+     * This method will check for all of the user inputs and call the required method according to the keyword used.
+     * @throws IndexOutOfBoundsException the exception when accessing an index that is out of bound of the array list
+     * @throws StringIndexOutOfBoundsException the exception when accessing a string that is out of the bound of the input string.
+     */
     public void startTask() {
         while (true) {
             String userInputs;
